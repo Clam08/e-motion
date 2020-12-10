@@ -1,0 +1,37 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Write an Entry</title>
+  <meta name="description" content="main entry page for the e-motion web app mvp">
+  <meta name="author" content="milo shields">
+  <link rel="stylesheet" href="entrystyle.css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet">
+</head>
+<body>
+    <div id="all-contain">
+        <div id = "left-contain">
+            <h1>write anything</h1>
+            <div contenteditable="true" id="entry-box">
+            </div>
+        </div>
+
+        <div id = "divider"></div>
+
+
+        <div id = "right-contain">
+            <h1>and we'll analyze it for you</h1>
+            <div class="wrap">
+                <button class="button" id="analyze">begin analysis</button>
+            </div>
+            <div class="dial" style="display:none;">
+			             <div class="container chart" data-size="400" data-value="88" data-arrow="up">
+			                      </div>
+		      </div>
+        </div>
+    </div>
+  <script src="entry.js"></script>
+</body>
+</html>

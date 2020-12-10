@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+<style>
+	input[type=text], select {
+	  width: 80%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	}
+	input[type=submit] {
+	  width: 100%;
+	  background-color: #B9C4CB;
+	  color: white;
+	  padding: 14px 20px;
+	  margin: 8px 0;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	}
+	input[type=submit]:hover {
+	  background-color: #A5B2BB;
+	}
+	div {
+	  border-radius: 5px;
+	  background-color: #f2f2f2;
+	  padding: 20px;
+	}
+	body {
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+<script>
+	function validateForm() {
+		var user_name = document.forms[0]["user_name"].value;
+	  var password = document.forms[0]["password"].value;
+		if (user_name == "" || password == "") {
+			alert("Please fill in all boxes to login.");
+			return false;
+		}
+	}
+</script>
+</head>
+
+
+<body>
+  <h1> Login </h1><br>
+  <div>
+  <form action = "/process_login" method = "GET" onsubmit="return validateForm()">
+     User name: <input type = "text" name = "user_name">  <br>
+		 Password: <input type = "text" name = "password">  <br>
+     <input type = "submit" value = "Submit">
+  </form>
+	<a href="register.html">register</a>
+  </div>
+</body>
+</html>

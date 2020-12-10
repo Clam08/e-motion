@@ -1,37 +1,48 @@
-<!doctype html>
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-
-  <title>Write an Entry</title>
-  <meta name="description" content="main entry page for the e-motion web app mvp">
-  <meta name="author" content="milo shields">
-  <link rel="stylesheet" href="entrystyle.css">
-  <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Register</title>
+<style>
+	input[type=text], select {
+	  width: 80%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	}
+	input[type=submit] {
+	  width: 100%;
+	  background-color: #B9C4CB;
+	  color: white;
+	  padding: 14px 20px;
+	  margin: 8px 0;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	}
+	input[type=submit]:hover {
+	  background-color: #A5B2BB;
+	}
+	div {
+	  border-radius: 5px;
+	  background-color: #f2f2f2;
+	  padding: 20px;
+	}
+	body {
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
 </head>
+
+
 <body>
-    <div id="all-contain">
-        <div id = "left-contain">
-            <h1>write anything</h1>
-            <div contenteditable="true" id="entry-box">
-            </div>
-        </div>
-
-        <div id = "divider"></div>
-
-
-        <div id = "right-contain">
-            <h1>and we'll analyze it for you</h1>
-            <div class="wrap">
-                <button class="button" id="analyze">begin analysis</button>
-            </div>
-            <div class="dial" style="display:none;">
-			             <div class="container chart" data-size="400" data-value="88" data-arrow="up">
-			                      </div>
-		      </div>
-        </div>
-    </div>
-  <script src="entry.js"></script>
+  <h1> Hello </h1><br>
+  <div>
+  </div>
 </body>
 </html>

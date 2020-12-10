@@ -18,12 +18,14 @@ async function verify_user_password(user_n, password) {
     
     theQuery = {user:user_n}
     var items_found = await coll.find(theQuery).toArray();
-    console.log(items_found[0].password)
     
-    if(password == items_found[0].password){
-      console.log("match")
-      return "match";
+    for (i=0; i<items_found.length; i++){
+      if(password == items_found[i].password){
+        console.log("match")
+        return "match";
+      }
     }
+
     return "no_match";
   } catch (err) {
       console.log(err);
@@ -55,7 +57,7 @@ async function insert_users(user_n, password) {
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-   res.sendFile( __dirname + "/" + "register.html" );
+   res.sendFile( __dirname + "/" + "login.html" );
 })
 app.get('/login.html', function (req, res) {
    res.sendFile( __dirname + "/" + "login.html" );
@@ -75,7 +77,7 @@ app.get('/process_get', async function (req, res) { //input user, take to login 
   password = qobj.password; 
   await insert_users(user_n, password);
   
-  res.redirect("http://localhost:3000/login.html" );
+  res.redirect("https://comp20-final-login.herokuapp.com/login.html" );
   res.end();
 })
 
@@ -88,12 +90,12 @@ app.get('/process_login', async function (req, res) { //check users, take to mai
   console.log("result " + result)
   
   if (result == "match"){
-    res.redirect( "http://localhost:3000/index.html" );
+    res.redirect( "https://muyin-yao.github.io/comp20_final/index.html" );
     res.end();
     return
   }  
   if (result == "no_match"){
-    res.redirect( "http://localhost:3000/register.html" );
+    res.redirect( "https://comp20-final-login.herokuapp.com/register.html" );
     res.end();
     return
   }

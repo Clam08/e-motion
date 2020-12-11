@@ -38,21 +38,14 @@
 	}
 </style>
 <script>
-	// fetch('/login')
-	//   .then(response => response.json())
-	//   .then(data => console.log(data));
-
-	// window.location.assign("/index.html");
-	
 	function validateForm() {
-		var user_name = document.forms[0]["user_name"].value;
+		var email = document.forms[0]["email"].value;
 	  var password = document.forms[0]["password"].value;
-		if (user_name == "" || password == "") {
+		if (email == "" || password == "") {
 			alert("Please fill in all boxes to login.");
 			return false;
 		}
 	}
-	
 </script>
 </head>
 
@@ -61,14 +54,12 @@
   <h1> Login </h1><br>
   <div>
   <form action = "/process_login" method = "GET" onsubmit="return validateForm()">
-     User name: <input type = "text" name = "user_name">  <br>
+     Email: <input type = "text" name = "email">  <br>
 		 Password: <input type = "text" name = "password">  <br>
      <input type = "submit" value = "Submit">
   </form>
 	<a href="register.html">register</a>
 	
-	<!-- //login succ, have web token
-	redirect to index -->
   </div>
 </body>
 </html>

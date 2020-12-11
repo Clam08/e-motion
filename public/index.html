@@ -2,30 +2,117 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Register</title>
+<title>INDEX</title>
 <style>
+.entry {
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
 </style>
+<script>
+
+var user_info;
+
+fetch("/user")
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    user_info = data.email;
+    user_name = data.name;
+    document.getElementById("data").innerHTML = JSON.stringify(data);
+    
+    fetch("/blog", {
+      headers: {
+        'Content-Type': 'application/json',
+        'email': user_info,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      
+      num_entries = data.length;
+      report = user_name + "'s entries  are: <br>";
+      for (i=0; i<num_entries; i++) {
+        report += "<div class = 'entry'>" + data[i] + "</div>"; 
+      }
+      
+      document.getElementById("data3").innerHTML = report;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+  
+  // 
+  // document.getElementById("data2").innerHTML = JSON.stringify(user_info);
+
+
+
+// function getDate() {
+//   /* Step 1: Make instance of request object to make HTTP request after page is loaded*/
+//   request = new XMLHttpRequest();
+//   console.log("1 - request object created");
+// 
+//   // Step 2: Set the URL for the AJAX request to be the JSON file
+//   request.open("GET", "/blog", true)
+//   console.log("2 - opened request file");
+// 
+//   // Step 3: set up event handler/callback
+//   request.onreadystatechange = function() {
+//     console.log("3 - readystatechange event fired.");
+// 
+//     if (request.readyState == 4 && request.status == 200) {
+// 
+//       // Step 5: wait for done + success
+//       console.log("5 - response received");
+//       result = request.responseText;
+//       // document.write(result);
+//       covid_cases = JSON.parse(result);
+//       newest = covid_cases.length;
+//       report = "Total number of cases confirmed in US in recent 5 days are: <br>";
+//       for (i=newest-5; i<newest; i++) {
+//         report += covid_cases[i]["Date"]
+//          + ": " + covid_cases[i]["Cases"] + "<br>"; 
+//       }
+//       document.getElementById("data").innerHTML = report;
+//     }
+//     else if (request.readyState == 4 && request.status != 200) {
+// 
+//       document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+// 
+//     }
+// 
+//     else if (request.readyState == 3) {
+// 
+//       document.getElementById("data").innerHTML = "Too soon!  Try again";
+// 
+//     }
+// 
+//   }
+// // Step 4: fire off the HTTP request
+//   request.send();
+//   console.log("4 - Request sent");
+// }
+
+</script>
 </head>
 
 
 <body>
   <h1> Hello </h1><br>
 	<a href="/login.html">login</a>
-	
-<script>
-fetch("/user")
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-    if (data != ""){
-      window.location.href = "/blog.html";
-    }
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+  <div style="border: double; padding: 10px;" id="data">Loading...</div>
+  <div style="padding: 10px;" id="data3">Loading...</div>
   
-</script>
+  <a href="blog.html">blog</a>
 
 </body>
 </html>

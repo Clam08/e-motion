@@ -3,36 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog</title>
-<style>
-</style>
+<script>
+</script>
 </head>
-
 
 <body>
   <h1> Blog </h1><br>
-	
-<script>
-fetch("/user")
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-
-fetch('/blog')
-.then(function(response) {
-    return response.text();
-})
-.then(data => {
-  console.log('Success:', data);
-})
-.catch((error) => {
-  console.error('Error:', error);
-});
-  
-</script>
+  <form action = "/entry_get" method = "GET" onsubmit="return validateForm()">
+     Title: <input type = "text" name = "title">  <br>
+     Content: <input type = "text" name = "content">  <br>
+     <input type = "submit" value = "Submit">
+  </form>
 
 </body>
 </html>

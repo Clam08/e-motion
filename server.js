@@ -1,14 +1,12 @@
 var http = require('http');
 var url = require('url');
+var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const mongo_url = "mongodb+srv://myao:myao@cluster0.3yzgg.mongodb.net/?retryWrites=true&w=majority";
-
-var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
 
-
-const users = []
+const users = [];
 
 async function verify_user_password(user_n, password) {
   const client = await MongoClient.connect(mongo_url)
@@ -22,11 +20,14 @@ async function verify_user_password(user_n, password) {
     for (i=0; i<items_found.length; i++){
       if(password == items_found[i].password){
         console.log("match")
-        return "match";
+        user = {
+          id: items_found[i]._id,
+          name: items_found[i].user
+        }
+        users.push(user);
+        return user;
       }
     }
-
-    return "no_match";
   } catch (err) {
       console.log(err);
   } finally {
@@ -36,8 +37,6 @@ async function verify_user_password(user_n, password) {
 
 async function insert_users(user_n, password) {
     await MongoClient.connect(mongo_url, function(err, db) {
-    console.log("connected");
-
     if (err) throw err;
   
     const dbo = db.db("emotion");
@@ -48,7 +47,6 @@ async function insert_users(user_n, password) {
       if (err) throw err;
       console.log("new document inserted");
     });
-    
     console.log("Success!");
     db.close();
   });
@@ -56,32 +54,22 @@ async function insert_users(user_n, password) {
 
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-   res.sendFile( __dirname + "/" + "login.html" );
-})
-app.get('/login.html', function (req, res) {
-   res.sendFile( __dirname + "/" + "login.html" );
-})
-app.get('/index.html', function (req, res) {
-   res.sendFile( __dirname + "/" + "index.html" );
-})
-app.get('/register.html', function (req, res) {
-   res.sendFile( __dirname + "/" + "register.html" );
-})
-
-
-app.get('/process_get', async function (req, res) { //input user, take to login page
+app.get('/process_get', async (req, res) => { //input user, take to login page
   var qobj = url.parse(req.url, true).query; //parse the query
   
   user_n = qobj.user_name;
   password = qobj.password; 
   await insert_users(user_n, password);
   
-  res.redirect("https://comp20-final-login.herokuapp.com/login.html" );
+  res.redirect("/login.html" );
   res.end();
 })
 
-app.get('/process_login', async function (req, res) { //check users, take to main page
+app.get("/random", (req, res) => {
+  res.status(200).json({message: "what is the matter"});
+})
+
+app.get('/process_login', async (req, res) => { //check users, take to main page
   var qobj = url.parse(req.url, true).query; //parse the query
   user_n = qobj.user_name;
   password = qobj.password; 
@@ -89,23 +77,23 @@ app.get('/process_login', async function (req, res) { //check users, take to mai
   result = await verify_user_password(user_n, password);
   console.log("result " + result)
   
-  if (result == "match"){
-    res.redirect( "https://muyin-yao.github.io/comp20_final/index.html" );
-    res.end();
-    return
-  }  
-  if (result == "no_match"){
-    res.redirect( "https://comp20-final-login.herokuapp.com/register.html" );
-    res.end();
-    return
+  if (result != ""){
+    res.redirect('/index.html')
+  }  else {
+    res.redirect( "register.html" );
   }
   res.end();
 })
 
+app.get('/user', (req, res) => res.send(users[0]));
+
+app.post('/blog', (req, res) => {
+  res.send({message:"helldfadfadfdo"})
+});
+
 var server = app.listen(port, function () {
    var host = server.address().address
    var port = server.address().port
-   
    console.log("Example app listening at http://%s:%s", host, port)
 })
 

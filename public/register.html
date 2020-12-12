@@ -39,7 +39,7 @@
 </style>
 <script>
 	function validateForm() {
-		var user_name = document.forms[0]["user_name"].value;
+		var user_name = document.forms[0]["name"].value;
 	  var password = document.forms[0]["password"].value;
 		var password_2 = document.forms[0]["password_2"].value;
 		if (user_name == "" || password == "" || password_2 == "") {
@@ -58,8 +58,8 @@
 <body>
   <h1>Register</h1>
   <div>
-  <form action = "/process_get" method = "GET" onsubmit="return validateForm()">
-     User name: <input type = "text" name = "user_name">  <br>
+  <form id="register_form" onsubmit="validateForm()">
+     User name: <input type = "text" name = "name">  <br>
 		 Email: <input type = "text" name = "email">  <br>
 		 Password: <input type = "text" name = "password">  <br>
 		 Password again: <input type = "text" name = "password_2">  <br>
@@ -67,5 +67,38 @@
   </form>
 	<a href="login.html">login</a>
   </div>
+	
+	<script>
+		const register_form = document.getElementById("register_form");
+		
+		function insertForm(e) {
+			e.preventDefault();
+			var name = document.forms[0]["name"].value;
+			var password = document.forms[0]["password"].value;
+			var email = document.forms[0]["email"].value;
+			
+			register_data = {"user": name, "email": email, "password": password}
+			fetch("/register", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(register_data)
+			})
+			.then(response => {
+				if(response.status == 200){
+					window.location.href = "/login.html"
+				} 
+				window.location.href = "/register.html"
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+		}
+		
+		register_form.addEventListener("submit", insertForm);
+		
+	</script>
+	
 </body>
 </html>

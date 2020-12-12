@@ -37,29 +37,54 @@
 		margin-right: auto;
 	}
 </style>
-<script>
-	function validateForm() {
-		var email = document.forms[0]["email"].value;
-	  var password = document.forms[0]["password"].value;
-		if (email == "" || password == "") {
-			alert("Please fill in all boxes to login.");
-			return false;
-		}
-	}
-</script>
+
 </head>
 
 
 <body>
   <h1> Login </h1><br>
   <div>
-  <form action = "/process_login" method = "GET" onsubmit="return validateForm()">
+  <form id="login_form">
      Email: <input type = "text" name = "email">  <br>
-		 Password: <input type = "text" name = "password">  <br>
+		 Password: <input type = "password" name = "password">  <br>
      <input type = "submit" value = "Submit">
   </form>
 	<a href="register.html">register</a>
 	
   </div>
+	
+	<script>
+		const login_form = document.getElementById("login_form");
+		async function validateForm(e) {
+			e.preventDefault();
+			var email = document.forms[0]["email"].value;
+		  var password = document.forms[0]["password"].value;
+			if (email == "" || password == "") {
+				alert("Please fill in all boxes to login.");
+				return false;
+			}
+			
+			login_data = {"email": email, "password": password}
+			fetch("/login", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(login_data)
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data.id);
+				window.localStorage.setItem("emotion_user_id", data.id);
+				window.location.href = "/index.html"
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+		}
+		
+		login_form.addEventListener("submit", validateForm);
+	</script>
+
 </body>
 </html>

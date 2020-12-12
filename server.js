@@ -2,103 +2,101 @@ var http = require('http');
 var url = require('url');
 var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
+
+var verifyToken = require('./UserVerification.js');
+
 const mongo_url = "mongodb+srv://myao:myao@cluster0.3yzgg.mongodb.net/?retryWrites=true&w=majority";
 var app = express();
 var port = process.env.PORT || 3000;
 
-const users = [];
+app.use(express.json());
+app.use(express.static('public'));
 
-async function verify_user_password(user_email, password) {
-  const client = await MongoClient.connect(mongo_url)
+app.post('/login', async (req, res) => { 
+  user_email = req.body.email;
+  password = req.body.password;
+  
+  const client = await MongoClient.connect(mongo_url);
+  console.log("MongoClient connect");
   try {
     const dbo = client.db("emotion");
     var coll = dbo.collection('users');
     
     theQuery = {email:user_email}
+    console.log("theQuery " + user_email);
     
-    var items_found = await coll.find(theQuery).toArray();
-    for (i=0; i<items_found.length; i++){
-      if(password == items_found[i].password){
-        console.log("match")
-        user = {
-          id: items_found[i]._id,
-          email: items_found[i].email,
-          name: items_found[i].user
-        }
-        users.push(user);
-        return "match";
-      }
+    var items_found = await coll.findOne(theQuery);
+    if (!items_found){
+      return res.status(400).json({message: "user not found"});
     }
+    
+    if(password != items_found.password){
+      return res.status(400).json({message: "password not match"});
+    }
+    console.log("success  match");
+    return res.status(200).json({message: "success", id: items_found._id});
   } catch (err) {
       console.log(err);
   } finally {
-      client.close();
+    client.close();
   }
-}
+})
 
-async function insert_users(user_n, user_email, password) {
-    await MongoClient.connect(mongo_url, function(err, db) {
-    if (err) throw err;
+app.post('/register', async (req, res) => {
+  user_name = req.body.user;
+  user_email = req.body.email;
+  password = req.body.password;
   
-    const dbo = db.db("emotion");
-    var collection = dbo.collection('users');
+  const client = await MongoClient.connect(mongo_url);
+  console.log("MongoClient connect");
+  try {
+    const dbo = client.db("emotion");
+    var coll = dbo.collection('users');
     
-    var newData = {"user": user_n, "email": user_email, "password": password};
-    collection.insertOne(newData, function(err, res) {
+    theQuery = {email:user_email}
+    console.log("theQuery " + user_email);
+    
+    var items_found = await coll.findOne(theQuery);
+    if (items_found){
+      return res.status(400).json({message: "user already exist"});
+    }
+    
+    var newData = {"user": user_name, "email": user_email, "password": password};
+    coll.insertOne(newData, function(err, res) {
       if (err) throw err;
       console.log("new document inserted");
     });
     console.log("Success!");
-    db.close();
-  });
-}
-
-app.use(express.static('public'));
-
-app.get('/process_get', async (req, res) => { //input user, take to login page
-  var qobj = url.parse(req.url, true).query; //parse the query
-  
-  user_n = qobj.user_name;
-  user_email = qobj.email;
-  password = qobj.password; 
-  await insert_users(user_n, user_email, password);
-  
-  res.redirect("/login.html" );
-  res.end();
-})
-
-app.get('/process_login', async (req, res) => { //check users, take to main page
-  var qobj = url.parse(req.url, true).query; //parse the query
-  user_email = qobj.email;
-  password = qobj.password; 
-  
-  result = await verify_user_password(user_email, password);
-  console.log("result " + result)
-  
-  if (result == "match"){
-    res.redirect( "index.html" );
-  } else {
-    res.redirect( "register.html" );
+    dbo.close();
+    return res.status(200).json({message: "success"});
+    
+  } catch (err) {
+      console.log(err);
+  } finally {
+    client.close();
   }
-  res.end();
 })
 
-app.get('/user', (req, res) => res.send(users[0]));
-
-app.get('/blog', async (req, res) => {
-  user_id = req.headers.email;
-  console.log("user_id " + user_id);
-  
+app.get('/blog', verifyToken, async (req, res) => {
+  console.log("user_id in get-blog " + req.user_id);
   const client = await MongoClient.connect(mongo_url)
   try {
     const dbo = client.db("emotion");
     var coll = dbo.collection('users');
+      
+    theQuery = { "_id" : ObjectId(req.user_id)}
     
-    theQuery = {email:user_id}
+    console.log("before items_found" );
+    var items_found = await coll.findOne(theQuery);
+    if (!items_found){
+      return res.status(400).json({message: "success"});
+    }
+    console.log("items_found " + items_found);
     
-    var items_found = await coll.find(theQuery).toArray();
+    res.status(200).send(items_found);
+    // return res.status(200).json({message: "success"});
     
-    res.send(items_found[0].entries);
   } catch (err) {
       console.log(err);
   } finally {
@@ -106,33 +104,30 @@ app.get('/blog', async (req, res) => {
   }
 });
 
-app.get('/entry_get', async (req, res) => {
-  var qobj = url.parse(req.url, true).query; //parse the query
-  
-  user_text = qobj.content;
-  console.log("user_text " + user_text);
-  
+
+app.post('/entry_add', verifyToken, async (req, res) => {
+  user_text = req.body.txt;
+  console.log("entry_add " + req.user_id);
   const client = await MongoClient.connect(mongo_url)
   try {
     const dbo = client.db("emotion");
     var coll = dbo.collection('users');
-    
-    user_id = users[0].email;
-    theQuery = {email:user_id}
+      
+    theQuery = { "_id" : ObjectId(req.user_id)}    
     updateDocument = {
       $push: { "entries": user_text },
     };
-    
     await coll.updateOne(theQuery, updateDocument);
-    console.log("push success");
-    res.redirect("index.html");
+    console.log("push success"); 
     
+    return res.status(200).json({message: "success"});
   } catch (err) {
       console.log(err);
   } finally {
       client.close();
   }
-});
+})
+
 
 var server = app.listen(port, function () {
    var host = server.address().address

@@ -4,16 +4,55 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog</title>
 <script>
+
 </script>
 </head>
 
 <body>
   <h1> Blog </h1><br>
-  <form action = "/entry_get" method = "GET" onsubmit="return validateForm()">
+  <form id="blog_form">
      Title: <input type = "text" name = "title">  <br>
      Content: <input type = "text" name = "content">  <br>
      <input type = "submit" value = "Submit">
   </form>
+  
+  <script>
+  
+    token = window.localStorage.getItem("emotion_user_id");
+    console.log('token:', token);
+  
+    const blog_form = document.getElementById("blog_form");
+
+    function insertForm(e) {
+      e.preventDefault();
+      var txt = document.forms[0]["content"].value;
+      
+      txt_data = {"txt": txt}
+      fetch("/entry_add", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': token
+        },
+        body: JSON.stringify(txt_data)
+      })
+      .then(response => {
+        if(response.status == 200){
+          window.location.href = "/index.html"
+        } else {
+          window.location.href = "/blog.html"
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+    
+    blog_form.addEventListener("submit", insertForm);
+    
+  </script>
+
+
 
 </body>
 </html>

@@ -7,9 +7,152 @@
 	<title>Write an Entry</title>
 	<meta name="description" content="main entry page for the e-motion web app mvp">
 	<meta name="author" content="milo shields">
-	<link rel="stylesheet" href="entrystyle.css">
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+	<style>
+		#all-contain{
+		    display:flex;
+		    justify-content: space-around;
+		    height: 100vh;
+		    width: 100vw;
+		}
+		#left-contain{
+		    width:40vw;
+		    height:100%;
+		    text-align: center;
+		}
+		#divider{
+		    height:97.5%;
+		    width:5px;
+		    background-color: black;
+		    margin-top: -.99vw;
+		}
+		#right-contain{
+		    width:40vw;
+		    height:100vh;
+		    text-align: center;
+		}
+		#entry-box{
+		    font-size: 26px;
+		    text-align: left;
+		    padding: 15px;
+		    line-height: 1.6;
+		    outline-style: solid;
+
+            width: 40vw; 
+            height: 70%; 
+            overflow-x: hidden; 
+            overflow-y: auto; 
+            
+		}
+
+
+
+		/*BUTTON STUFF - NOT MY INTELLECTUAL PROPERTY, TAKEN FROM THE WEB*/
+
+		.wrap {
+		  margin-top: 25vh;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		}
+
+		.button {
+		  min-width: 300px;
+		  min-height: 60px;
+		  font-family: 'Nunito', sans-serif;
+		  font-size: 22px;
+		  letter-spacing: 1.3px;
+		  font-weight: 700;
+		  color: black;
+		  background: white;
+		  /*background: linear-gradient(90deg, black, white);*/
+		  border: none;
+		  border-radius: 1000px;
+		  box-shadow: 12px 12px 24px black;
+		  transition: all 1s ease-in-out 0s;
+		  cursor: pointer;
+		  outline: none;
+		  position: relative;
+		  padding: 10px;
+		  }
+
+		button::before {
+		content: '';
+		  border-radius: 1000px;
+		  min-width: calc(300px + 12px);
+		  min-height: calc(60px + 12px);
+		  border: none;
+		  box-shadow: 0 0 60px black;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  opacity: 0;
+		  transition: all 1s ease-in-out 0s;
+		}
+
+		.button:hover, .button:focus {
+		  color: black;
+		  transform: translateY(-6px);
+		}
+
+		button:hover::before, button:focus::before {
+		  opacity: 1;
+		}
+
+		button::after {
+		  content: '';
+		  width: 30px; height: 30px;
+		  border-radius: 100%;
+		  border: 6px solid black;
+		  position: absolute;
+		  z-index: -1;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  animation: ring 6s infinite;
+		}
+
+		button:hover::after, button:focus::after {
+		  animation: none;
+		  display: none;
+		}
+
+		@keyframes ring {
+		  0% {
+		    width: 30px;
+		    height: 30px;
+		    opacity: 1;
+		  }
+		  100% {
+		    width: 300px;
+		    height: 300px;
+		    opacity: 0;
+		  }
+		}
+
+		.dial {
+
+			width: 300px;
+			height: 300px;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.container {
+			flex: 1;
+			padding: 0 20px;
+		}
+
+
+
+	</style>
 </head>
 <header>
 	<nav>
@@ -17,7 +160,7 @@
 	    <a href="analyse.html">write</a>
 	    <a href="#.html">stats</a>
 	    <a href="#">logout</a>
-  	</nav>
+	</nav>
 </header>
 <body>
 	<div id="all-contain">
@@ -27,20 +170,26 @@
 			</div>
 		</div>
 
-			<div id = "divider"></div>
+		<div id = "divider"></div>
 
 
-			<div id = "right-contain">
-				<h1>and we'll analyze it for you</h1>
-				<div class="wrap">
-					<button class="button" id="analyze">begin analysis</button>
-				</div>
-				<div class="dial" style="display:none;">
-					<div class="container chart" data-size="400" data-value="88" data-arrow="up">
-					</div>
+		<div id = "right-contain">
+			<h1>and we'll analyze it for you</h1>
+			<div class="wrap">
+				<button class="button" id="analyze">begin analysis</button>
+			</div>
+			<div class="dial" style="display:none;">
+				<div class="container chart" data-size="400" data-value="88" data-arrow="up">
 				</div>
 			</div>
+		</div>
 	</div>
 	<script src="entry.js"></script>
+
 </body>
+<footer>
+	<ul>
+        <li><a href="mailto: info@emotion.com">Send Email</a></li>
+	</ul>
+</footer>
 </html>

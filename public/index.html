@@ -4,63 +4,70 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>INDEX</title>
 <style>
-.entry {
-  background-color: tomato;
-  color: white;
-  border: 2px solid black;
-  margin: 20px;
-  padding: 20px;
-}
+    .entry {
+        background-color: tomato;
+        color: white;
+        border: 2px solid black;
+        margin: 20px;
+        padding: 20px;
+    }
 </style>
 
 </head>
+<header>
+    <nav>
+      <a href="home.html"><img border="0" alt="e-motion" src="images/logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
+      <a href="analyse.html">write</a>
+      <a href="#.html">stats</a>
+      <a href="#">logout</a>
+    </nav>
+</header>
 
 
 <body>
-  <a href="/login.html">login</a>  
-  <a href="blog.html">blog</a>
-  <button type="button" id="logout">logout</button>
+    <a href="/login.html">login</a>  
+    <a href="blog.html">blog</a>
+    <button type="button" id="logout">logout</button>
 
-  <h1> Home Page </h1><br>
-  <div style="padding: 10px;" id="data">Loading...</div>
-  
-  <script>
-    const logout = document.getElementById("logout");
-    
-    function user_logout(e) {
-      window.localStorage.removeItem("emotion_user_id");
-      window.location.href = "/login.html"
-    }
-    
-    logout.addEventListener("click", user_logout);
-  </script>
-  
-  <script>
-    token = window.localStorage.getItem("emotion_user_id");
-    console.log('token:', token);
-    
-    fetch("/blog", {
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': token,
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      
-      num_entries = data.entries.length;
-      report = data.user + "'s entries  are: <br>";
-      for (i=0; i<num_entries; i++) {
-        report += "<div class = 'entry'>" + data.entries[i] + "</div>"; 
-      }
-      
-      document.getElementById("data").innerHTML = report;
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  </script>
+    <h1> Home Page </h1><br>
+    <div style="padding: 10px;" id="data">Loading...</div>
 
+    <script>
+        const logout = document.getElementById("logout");
+
+        function user_logout(e) {
+          window.localStorage.removeItem("emotion_user_id");
+          window.location.href = "/login.html"
+        }
+
+        logout.addEventListener("click", user_logout);
+    </script>
+  
+    <script>
+        token = window.localStorage.getItem("emotion_user_id");
+        console.log('token:', token);
+
+        fetch("/blog", {
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+          
+            num_entries = data.entries.length;
+            report = data.user + "'s entries  are: <br>";
+            for (i=0; i<num_entries; i++) {
+                report += "<div class = 'entry'>" + data.entries[i] + "</div>"; 
+            }
+          
+            document.getElementById("data").innerHTML = report;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    </script>
 </body>
 </html>

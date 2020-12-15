@@ -33,24 +33,26 @@
 	  background-color: #f2f2f2;
 	  padding: 20px;
 	}
-	body {
+	/*body {
 		width: 60%;
 		margin-left: auto;
 		margin-right: auto;
+	}*/
+	.container{
+		width:60%;
+
 	}
 </style>
 
 </head>
 <header>
 <nav>
-	    <a href="home.html"><img border="0" alt="e-motion" src="../images/logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
-	    <a href="analyse.html">write</a>
-	    <a href="#.html">stats</a>
-	    <a href="#">logout</a>
-	</nav>
+    <a href="home.html"><img border="0" alt="e-motion" src="../images/logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
+</nav>
 </header>
 
 <body>
+<div class="container">
   <h1> Login </h1><br>
   <div>
   <form id="login_form">
@@ -58,9 +60,11 @@
 		 Password: <input type = "password" name = "password">  <br>
      <input type = "submit" value = "Submit">
   </form>
-	<a href="register.html">register</a>
+  	Don't have an account?
+	<a href="register.html">Register Here</a>
 	
   </div>
+</div>
 	
 	<script>
 		const login_form = document.getElementById("login_form");

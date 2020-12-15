@@ -164,7 +164,7 @@
           stats_report += "<div class = 'stat_text'> Entries Written: "
           +num_entries
           +"<br />Average e-motion score: "
-          +(emotion_sum/num_entries)
+          +Math.round(emotion_sum/num_entries)
           +"<br />Days since first entry:</div>";
 
           document.getElementById("data").innerHTML = entries_report;

@@ -48,14 +48,12 @@
 
     const blog_form = document.getElementById("blog_form");
 
-    function insertForm(e) {
-      e.preventDefault();
-      getResponse();
+    function insertForm(score) {
       //var txt = document.forms[0]["content"].value;
       var txt = document.getElementById("entry-box").innerHTML;
 
       var date = new Date()
-      var score = 50
+      var score = Math.round(emotion_score)
 
       txt_data = {"entry": txt, "date": date, "score": score};
       fetch("/entry_add", {
@@ -79,8 +77,7 @@
       });
     }
 
-    blog_form.addEventListener("submit", insertForm);
-
+    blog_form.addEventListener("submit", getResponse);
 
     var emotion_score;
     /* not my code, used to replace chars with %20 that are not request-appropriate*/
@@ -107,7 +104,8 @@
     }
 
     /* to be called when the user needs to analyze their data */
-    function getResponse(){
+    function getResponse(e){
+        e.preventDefault();
         /* get data delimited by %20s from text elem*/
         var contenteditable = document.querySelector('[contenteditable]'),
         text = contenteditable.textContent;
@@ -124,6 +122,7 @@
                 analysis_obj = JSON.parse(this.responseText);
                 emotion_score = analysis_obj["score"];
                 showScore();
+                insertForm();
         	}
         });
 

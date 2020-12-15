@@ -22,11 +22,15 @@
     text-align: center;
 }
 body {
- font-family: 'Work Sans', sans-serif;
+    width: 100%; 
+    padding-top:6.5vw;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
- font-family: 'Crimson Text', serif;
+ font-family: 'Montserrat', serif;
 }
 #entry-box{
     font-size: 26px;

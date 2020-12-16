@@ -115,8 +115,8 @@
       +num_entries
       +"<br /><span class='category'>Average e<span style='color:#426ff5'>-</span>motion score:</span> "
       +(Math.round((emotion_sum/num_entries)*100))/100
-      +"<br /><span class='category'>Days since first entry: " +days_diff+ "</span>"
-      +"<br /><span class='category'>Average number of entries per day: " +(Math.round((num_entries/days_diff)*100))/100+ "</span></div>";
+      +"<br /><span class='category'>Days since first entry:</span> " +days_diff
+      +"<br /><span class='category'>Average number of entries per day:</span> " +(Math.round((num_entries/days_diff)*100))/100+ "</div>";
 
       document.getElementById("data").innerHTML = entries_report;
       document.getElementById("stats").innerHTML = stats_report;

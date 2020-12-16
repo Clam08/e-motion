@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
 <title>Login</title>
 <style>
 	input[type=text], select {
@@ -31,27 +33,38 @@
 	  background-color: #f2f2f2;
 	  padding: 20px;
 	}
-	body {
+	/*body {
 		width: 60%;
 		margin-left: auto;
 		margin-right: auto;
+	}*/
+	.container{
+		width:60%;
+
 	}
 </style>
 
 </head>
-
+<header>
+<nav>
+    <a href="index.html"><img border="0" alt="e-motion" src="../images/logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
+</nav>
+</header>
 
 <body>
+<div class="container">
   <h1> Login </h1><br>
   <div>
   <form id="login_form">
-     Email: <input type = "text" name = "email">  <br>
-		 Password: <input type = "password" name = "password">  <br>
-     <input type = "submit" value = "Submit">
+     Email: <input type = "text" class="type-field" name = "email">  <br>
+		 Password: <input type = "password" class="type-field" name = "password">  <br>
+     <input type = "submit" class="button-font" value = "Submit">
   </form>
-	<a href="register.html">register</a>
+  	Don't have an account?
+	<a href="register.html">Register Here</a>
 	
   </div>
+</div>
 	
 	<script>
 		const login_form = document.getElementById("login_form");

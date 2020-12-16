@@ -82,4 +82,9 @@ body {
 
 }
 
-
+.button-font{
+    font-family:'Montserrat', sans-serif;
+}
+.type-field{
+    height:1vw;
+}

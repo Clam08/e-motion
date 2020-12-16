@@ -10,12 +10,25 @@ const mongo_url = "mongodb+srv://myao:myao@cluster0.3yzgg.mongodb.net/?retryWrit
 var app = express();
 var port = process.env.PORT || 3000;
 
+function hashCode(password){
+    var hash = 0;
+    if (password.length == 0) return hash;
+    for (i = 0; i < password.length; i++){
+        char = password.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    console.log(hash)
+    return hash;
+}
+
 app.use(express.json());
 app.use(express.static('public'));
 
 app.post('/login', async (req, res) => {
   user_email = req.body.email;
   password = req.body.password;
+  password_hashed = hashCode(password);
 
   const client = await MongoClient.connect(mongo_url);
   console.log("MongoClient connect");
@@ -31,7 +44,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({message: "user not found"});
     }
 
-    if(password != items_found.password){
+    if(password_hashed != items_found.password){
       return res.status(400).json({message: "password not match"});
     }
     console.log("success  match");
@@ -47,6 +60,7 @@ app.post('/register', async (req, res) => {
   user_name = req.body.user;
   user_email = req.body.email;
   password = req.body.password;
+  password_hashed = hashCode(password);
 
   const client = await MongoClient.connect(mongo_url);
   console.log("MongoClient connect");
@@ -60,15 +74,15 @@ app.post('/register', async (req, res) => {
     var items_found = await coll.findOne(theQuery);
     if (items_found){
       return res.status(400).json({message: "user already exist"});
+      console.log("user already exist!");
     }
 
-    var newData = {"user": user_name, "email": user_email, "password": password};
+    var newData = {"user": user_name, "email": user_email, "password": password_hashed};
     coll.insertOne(newData, function(err, res) {
       if (err) throw err;
       console.log("new document inserted");
     });
     console.log("Success!");
-    dbo.close();
     return res.status(200).json({message: "success"});
 
   } catch (err) {
@@ -137,3 +151,5 @@ var server = app.listen(port, function () {
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)
 })
+
+

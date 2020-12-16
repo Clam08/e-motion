@@ -46,6 +46,7 @@ app.post('/login', async (req, res) => {
     }
 
     if(password_hashed != items_found.password){
+      console.log("user found, password wrong");
       return res.status(400).json({message: "password not match"});
     }
     console.log("success  match");

@@ -105,7 +105,7 @@ app.get('/blog', verifyToken, async (req, res) => {
     console.log("before items_found" );
     var items_found = await coll.findOne(theQuery);
     if (!items_found){
-      return res.status(400).json({message: "success"});
+      return res.status(400).json({message: "item not found"});
     }
     console.log("items_found " + items_found);
 

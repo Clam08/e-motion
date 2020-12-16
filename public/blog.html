@@ -148,8 +148,17 @@
       padding: 0 20px;
     }
     
-    .button2{
-      
+    .button2:link, .button2:visited {
+      background-color: #426ff5;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .button2:hover, .button2:active {
+      background-color: #426ff5;
     }
 
 
@@ -172,6 +181,7 @@
       <div id = "left-contain">
           <h1>write anything</h1>
           <div contenteditable="true" name ="content" id="entry-box"></div>
+          <br>
           <a class = 'button2' href="blog.html">write another entry</a>
           <a class = 'button2' href="index.html">back to home</a>
       </div>

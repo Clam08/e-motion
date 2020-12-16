@@ -78,7 +78,7 @@
             var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
             console.log("TRYING FOR "+i)
             emotion_sum += data.entries[i].score
-            entries_report += "<div class = 'entry'><span class = 'date'>Date: "
+            entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'>Date: "
                     + datestring + "</span><br />"
                     + "<span class = 'score'>e-motion Score: "
                     + data.entries[i].score + "<br /></span>"
@@ -100,6 +100,22 @@
     .catch((error) => {
       console.error('Error:', error);
     });
+    
+    function getEmotionColor(score){
+        console.log("getting color")
+        if(score < 25){
+            return "#5DADE2"
+        }
+        else if(score < 50){
+            return "#AED6F1"
+        }
+        else if (score < 75){
+            return "#FCFF96"
+        }
+        else if (score < 100){
+            return "#FCFF00"
+        }
+    }
   </script>
 
     <script>
@@ -113,73 +129,7 @@
         logout.addEventListener("click", user_logout);
     </script>
 
-    <script>
-        token = window.localStorage.getItem("emotion_user_id");
-        console.log('token:', token);
 
-        fetch("/blog", {
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': token,
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            //CODE TO GENERATE ENTRIES
-      entries_report = data.user + "'s entries are as follows: <br>";
-      console.log(JSON.stringify(data.entries))
-      emotion_sum = 0;
-
-
-
-      for (i=0; i<num_entries; i++) {
-            //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
-            console.log(data.entries[i])
-                var dt = new Date(data.entries[i].date)
-                //.parse(data.entries[i].date)
-                var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
-                console.log("TRYING FOR "+i)
-                emotion_sum += data.entries[i].score
-                entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'>Date: "
-                        + datestring + "</span><br />"
-                        + "<span class = 'score'>e-motion Score: "
-                        + data.entries[i].score + "<br /></span>"
-                        + "<span class = 'entry_text'>Entry:<br />"
-                        + data.entries[i].entry +"</span></div>";
-          }
-
-          //CODE TO GENERATE STATISTICS REGARDING ENTRIES
-          stats_report = data.user + "'s e-motion stats so far:";
-          stats_report += "<div class = 'stat_text'> Entries Written: "
-          +num_entries
-          +"<br />Average e-motion score: "
-          +Math.round(emotion_sum/num_entries)
-          +"<br />Days since first entry:</div>";
-
-          document.getElementById("data").innerHTML = entries_report;
-          document.getElementById("stats").innerHTML = stats_report;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-        function getEmotionColor(score){
-            console.log("getting color")
-            if(score < 25){
-                return "#5DADE2"
-            }
-            else if(score < 50){
-                return "#AED6F1"
-            }
-            else if (score < 75){
-                return "#FCFF96"
-            }
-            else if (score < 100){
-                return "#FCFF00"
-            }
-        }
-    </script>
 </div>
 </body>
 </html>

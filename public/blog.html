@@ -157,6 +157,7 @@
   <nav>
       <a href="index.html"><img border="0" alt="" src="logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
       <a href="blog.html">write</a>
+      <a href="login.html">login</a>
       <a href="#" id="logout">logout</a>
   </nav>
 </header>
@@ -188,6 +189,16 @@
   </form>
 </body>
 
+  <script>
+    const logout = document.getElementById("logout");
+
+    function user_logout(e) {
+      window.localStorage.removeItem("emotion_user_id");
+      window.location.href = "/login.html"
+    }
+
+    logout.addEventListener("click", user_logout);
+  </script>
 
 
   <script>

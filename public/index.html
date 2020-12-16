@@ -21,20 +21,21 @@
 </head>
 <header>
   <nav>
-      <a href="index.html"><img border="0" alt="" src="logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
-      <a href="blog.html">write</a>
-      <a href="#" id="logout">logout</a>
+        <a href="index.html"><img border="0" alt="" src="logo_tall.png" style="height:2.5vw;">e<span style="color:#426ff5">-</span>motion</a>
+        <a href="blog.html">write</a>
+        <a href="login.html">login</a>
+        <a href="#" id="logout">logout</a>
   </nav>
 </header>
 
 <body>
-  <h1>e-motion homepage and statistics</h1><br>
+    <div class="container">
+  <h1>home page</h1>
+  <h2>statistics</h2>
   <div class="center-content">
-      <div id = "stats">Your stats should show up here once you've written at least
-          one entry!
+      <div id = "stats">Your stats should show up here once you've written at least one entry! Try logging in or creating an account.
       </div>
-      <div style="padding: 10px;" id="data">It doesn't look we have any of your
-        entries! Try logging in or creating an account.</div>
+      <div style="padding: 10px 0;" id="data"></div>
   </div>
 
 
@@ -86,7 +87,7 @@
       }
 
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES
-      stats_report = data.user + "'s e-motion stats so far:";
+      stats_report = "<h3>" + data.user + "'s e-motion stats so far:</h3><hr>";
       stats_report += "<div class = 'stat_text'> Entries Written: "
       +num_entries
       +"<br />Average e-motion score: "
@@ -179,5 +180,6 @@
             }
         }
     </script>
+</div>
 </body>
 </html>

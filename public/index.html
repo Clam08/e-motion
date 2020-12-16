@@ -16,6 +16,9 @@
     width:50%;
     margin-right: auto;
 }
+.category{
+    font-weight:bold;
+}
 </style>
 
 </head>
@@ -67,7 +70,7 @@
       num_entries = data.entries.length;
 
       //CODE TO GENERATE ENTRIES
-      entries_report = data.user + "'s entries are as follows: <br>";
+      entries_report = "<h2>entries</h2>";
       console.log(JSON.stringify(data.entries))
       emotion_sum = 0;
       for (i=0; i<num_entries; i++) {
@@ -78,19 +81,19 @@
             var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
             console.log("TRYING FOR "+i)
             emotion_sum += data.entries[i].score
-            entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'>Date: "
+            entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'><span class='category'>Date:</span> "
                     + datestring + "</span><br />"
-                    + "<span class = 'score'>e-motion Score: "
+                    + "<span class = 'score'><span class='category'>e<span style='color:#426ff5'>-</span>motion Score:</span> "
                     + data.entries[i].score + "<br /></span>"
-                    + "<span class = 'entry_text'>Entry:<br />"
+                    + "<span class = 'entry_text'><span class='category'>Entry:</span><br />"
                     + data.entries[i].entry +"</span></div>";
       }
 
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES
-      stats_report = "<h3>" + data.user + "'s e-motion stats so far:</h3><hr>";
+      stats_report = "<h3>" + data.user + "'s e<span style='color:#426ff5'>-</span>motion stats so far:</h3>";
       stats_report += "<div class = 'stat_text'> Entries Written: "
       +num_entries
-      +"<br />Average e-motion score: "
+      +"<br />Average e<span style='color:#426ff5'>-</span>motion score: "
       +(emotion_sum/num_entries)
       +"<br />Days since first entry:</div>";
 

@@ -58,13 +58,7 @@
 				},
 				body: JSON.stringify(login_data)
 			})
-			.then(response => {
-				if(response.status == 400){
-						alert("user or password wrong");
-					  window.location.href = "/login.html"
-				}
-				window.location.href = "/index.html"
-			})
+			.then(response => response.json())
 			.then(data => {
 				console.log('Success:', data.id);
 				window.localStorage.setItem("emotion_user_id", data.id);

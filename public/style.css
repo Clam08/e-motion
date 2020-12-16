@@ -16,6 +16,7 @@ p{
 }
 
 nav{
+  /* font-family: Arial, Helvetica, sans-serif; */
     font-family: 'Montserrat', sans-serif;
     background-color:#ffffff;
     text-align:center;
@@ -33,11 +34,13 @@ nav{
     top:0;
 
     overflow: hidden;
+
+    z-index: 2;
+
     border-bottom: 5px solid black;
 }
 
 header{
-    z-index:99;
     position: fixed;
 }
 
@@ -77,7 +80,6 @@ footer {
     }
 }
 body {
-    z-index:-1;
     width: 100%; 
     padding-top:6.5vw;
     color: black;
@@ -90,4 +92,36 @@ body {
 }
 .type-field{
     height:1vw;
+}
+
+input[type=text], select {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=password], select {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #B9C4CB;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #A5B2BB;
 }

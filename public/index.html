@@ -4,13 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>INDEX</title>
 <style>
-    .entry {
-        background-color: tomato;
-        color: white;
-        border: 2px solid black;
-        margin: 20px;
-        padding: 20px;
-    }
+.entry {
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+#data{
+    width:50%;
+    margin-right: auto;
+}
 </style>
 
 </head>
@@ -25,7 +29,82 @@
 
 
 <body>
-    <a href="/login.html">login</a>  
+<<<<<<< HEAD
+  <a href="/login.html">login</a>
+  <a href="blog.html">blog</a>
+  <button type="button" id="logout">logout</button>
+
+  <h1>  </h1><br>
+  <div style="padding: 10px;" id="data">It doesn't look we have any of your
+    entries! Try logging in or creating an account.</div>
+  <div id = "stats">Your stats should show up here once you've written at least
+      one entry!
+  </div>
+
+  <script>
+    const logout = document.getElementById("logout");
+
+    function user_logout(e) {
+      window.localStorage.removeItem("emotion_user_id");
+      window.location.href = "/login.html"
+    }
+
+    logout.addEventListener("click", user_logout);
+  </script>
+
+  <script>
+    token = window.localStorage.getItem("emotion_user_id");
+    console.log('token:', token);
+
+    fetch("/blog", {
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': token,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+
+      num_entries = data.entries.length;
+
+      //CODE TO GENERATE ENTRIES
+      entries_report = data.user + "'s entries are as follows: <br>";
+      console.log(JSON.stringify(data.entries))
+      emotion_sum = 0;
+      for (i=0; i<num_entries; i++) {
+        //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
+        console.log(data.entries[i])
+            var dt = new Date(data.entries[i].date)
+            //.parse(data.entries[i].date)
+            var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
+            console.log("TRYING FOR "+i)
+            emotion_sum += data.entries[i].score
+            entries_report += "<div class = 'entry'><span class = 'date'>Date: "
+                    + datestring + "</span><br />"
+                    + "<span class = 'score'>e-motion Score: "
+                    + data.entries[i].score + "<br /></span>"
+                    + "<span class = 'entry_text'>Entry:<br />"
+                    + data.entries[i].entry +"</span></div>";
+      }
+
+      //CODE TO GENERATE STATISTICS REGARDING ENTRIES
+      stats_report = data.user + "'s e-motion stats so far:";
+      stats_report += "<div class = 'stat_text'> Entries Written: "
+      +num_entries
+      +"<br />Average e-motion score: "
+      +(emotion_sum/num_entries)
+      +"<br />Days since first entry:</div>";
+
+      document.getElementById("data").innerHTML = entries_report;
+      document.getElementById("stats").innerHTML = stats_report;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  </script>
+=======
+    <a href="/login.html">login</a>
     <a href="blog.html">blog</a>
     <button type="button" id="logout">logout</button>
 
@@ -42,7 +121,7 @@
 
         logout.addEventListener("click", user_logout);
     </script>
-  
+
     <script>
         token = window.localStorage.getItem("emotion_user_id");
         console.log('token:', token);
@@ -56,14 +135,40 @@
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-          
-            num_entries = data.entries.length;
-            report = data.user + "'s entries  are: <br>";
-            for (i=0; i<num_entries; i++) {
-                report += "<div class = 'entry'>" + data.entries[i] + "</div>"; 
-            }
-          
-            document.getElementById("data").innerHTML = report;
+            //CODE TO GENERATE ENTRIES
+      entries_report = data.user + "'s entries are as follows: <br>";
+      console.log(JSON.stringify(data.entries))
+      emotion_sum = 0;
+
+
+
+      for (i=0; i<num_entries; i++) {
+            report += "<div class = 'entry'>" + data.entries[i] + "</div>";
+            //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
+            console.log(data.entries[i])
+                var dt = new Date(data.entries[i].date)
+                //.parse(data.entries[i].date)
+                var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
+                console.log("TRYING FOR "+i)
+                emotion_sum += data.entries[i].score
+                entries_report += "<div class = 'entry'><span class = 'date'>Date: "
+                        + datestring + "</span><br />"
+                        + "<span class = 'score'>e-motion Score: "
+                        + data.entries[i].score + "<br /></span>"
+                        + "<span class = 'entry_text'>Entry:<br />"
+                        + data.entries[i].entry +"</span></div>";
+          }
+
+          //CODE TO GENERATE STATISTICS REGARDING ENTRIES
+          stats_report = data.user + "'s e-motion stats so far:";
+          stats_report += "<div class = 'stat_text'> Entries Written: "
+          +num_entries
+          +"<br />Average e-motion score: "
+          +(emotion_sum/num_entries)
+          +"<br />Days since first entry:</div>";
+
+          document.getElementById("data").innerHTML = entries_report;
+          document.getElementById("stats").innerHTML = stats_report;
         })
         .catch((error) => {
             console.error('Error:', error);

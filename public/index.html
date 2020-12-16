@@ -105,11 +105,11 @@
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES
       document.getElementById("user_title").innerHTML = data.user + "'s homepage";
 
-      stats_report = "<div class = 'stat_text'> Entries Written: "
+      stats_report = "<div class = 'stat_text'> <span class='category'>Entries Written:</span> "
       +num_entries
-      +"<br />Average e<span style='color:#426ff5'>-</span>motion score: "
+      +"<br /><span class='category'>Average e<span style='color:#426ff5'>-</span>motion score:</span> "
       +(emotion_sum/num_entries)
-      +"<br />Days since first entry:</div>";
+      +"<br /><span class='category'>Days since first entry:</span></div>";
 
       document.getElementById("data").innerHTML = entries_report;
       document.getElementById("stats").innerHTML = stats_report;

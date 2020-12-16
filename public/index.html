@@ -5,9 +5,8 @@
 <title>INDEX</title>
 <style>
 .entry {
-  background-color: tomato;
-  color: white;
-  border: 2px solid black;
+  color: black;
+  border-radius: 10px;
   margin: 20px;
   padding: 20px;
 }
@@ -29,17 +28,15 @@
 
 
 <body>
-<<<<<<< HEAD
-  <a href="/login.html">login</a>
-  <a href="blog.html">blog</a>
-  <button type="button" id="logout">logout</button>
-
-  <h1>  </h1><br>
-  <div style="padding: 10px;" id="data">It doesn't look we have any of your
-    entries! Try logging in or creating an account.</div>
-  <div id = "stats">Your stats should show up here once you've written at least
-      one entry!
+  <h1>e-motion homepage and statistics</h1><br>
+  <div class="center-content">
+      <div id = "stats">Your stats should show up here once you've written at least
+          one entry!
+      </div>
+      <div style="padding: 10px;" id="data">It doesn't look we have any of your
+        entries! Try logging in or creating an account.</div>
   </div>
+
 
   <script>
     const logout = document.getElementById("logout");
@@ -143,7 +140,6 @@
 
 
       for (i=0; i<num_entries; i++) {
-            report += "<div class = 'entry'>" + data.entries[i] + "</div>";
             //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
             console.log(data.entries[i])
                 var dt = new Date(data.entries[i].date)
@@ -151,7 +147,7 @@
                 var datestring =   (dt.getMonth() + 1) + "/" + dt.getDate() + "/" +dt.getFullYear();
                 console.log("TRYING FOR "+i)
                 emotion_sum += data.entries[i].score
-                entries_report += "<div class = 'entry'><span class = 'date'>Date: "
+                entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'>Date: "
                         + datestring + "</span><br />"
                         + "<span class = 'score'>e-motion Score: "
                         + data.entries[i].score + "<br /></span>"
@@ -173,6 +169,22 @@
         .catch((error) => {
             console.error('Error:', error);
         });
+
+        function getEmotionColor(score){
+            console.log("getting color")
+            if(score < 25){
+                return "#5DADE2"
+            }
+            else if(score < 50){
+                return "#AED6F1"
+            }
+            else if (score < 75){
+                return "#FCFF96"
+            }
+            else if (score < 100){
+                return "#FCFF00"
+            }
+        }
     </script>
 </body>
 </html>

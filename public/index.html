@@ -86,7 +86,7 @@
       entries_report = "<h2>entries</h2>";
       console.log(JSON.stringify(data.entries))
       emotion_sum = 0;
-      for (i=0; i<num_entries; i++) {
+      for (i = num_entries - 1; i > 0; i--) {
         //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
         console.log(data.entries[i])
             var dt = new Date(data.entries[i].date)
@@ -105,11 +105,18 @@
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES
       document.getElementById("user_title").innerHTML = data.user + "'s homepage";
 
+      first_date = new Date(data.entries[0].date)
+      curr_date = new Date();
+
+      var difference = curr_date.getTime() - first_date.getTime();
+      var days_diff = Math.ceil(difference / (1000 * 3600 * 24));
+
       stats_report = "<div class = 'stat_text'> <span class='category'>Entries Written:</span> "
       +num_entries
       +"<br /><span class='category'>Average e<span style='color:#426ff5'>-</span>motion score:</span> "
       +(emotion_sum/num_entries)
-      +"<br /><span class='category'>Days since first entry:</span></div>";
+      +"<br /><span class='category'>Days since first entry: " +days_diff+ "</span>"
+      +"<br /><span class='category'>Average number of entries per day: " +(Math.round((num_entries/days_diff)*100))/100+ "</span></div>";
 
       document.getElementById("data").innerHTML = entries_report;
       document.getElementById("stats").innerHTML = stats_report;
@@ -117,7 +124,7 @@
     .catch((error) => {
       console.error('Error:', error);
     });
-    
+
     function getEmotionColor(score){
         console.log("getting color")
         if(score < 25){

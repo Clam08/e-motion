@@ -68,9 +68,13 @@
 			})
 			.then(response => {
 				if(response.status == 200){
-					window.location.href = "/login.html"
-				} 
-				window.location.href = "/register.html"
+					alert("register successful");
+					window.location.href = "/login.html";
+				} else if(response.status == 400){
+						alert("user already exist");
+					  window.location.href = "/login.html";
+				}
+				window.location.href = "/login.html";
 			})
 			.catch((error) => {
 				console.error('Error:', error);

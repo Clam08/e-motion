@@ -146,7 +146,7 @@ Dial.prototype.createText = function() {
     text.setAttribute('fill', '#78F8EC');
     text.setAttribute('text-anchor', 'middle');
     var tspanSize = fontSize / 3;
-    text.innerHTML = 0 + '<tspan font-size="' + tspanSize + '" dy="' + -tspanSize * 1.2 + '">%</tspan>';
+    text.innerHTML = 0 + '<tspan font-size="' + tspanSize + '" dy="' + -tspanSize * 1.2 + '"></tspan>';
     this.svg.appendChild(text);
     this.text = text;
 };
@@ -221,7 +221,7 @@ Dial.prototype.setValue = function(value) {
 		var d = this.describeArc(xy, xy, xy, 180, 180 + c);
     this.slice.setAttribute('d', d);
     var tspanSize = (this.size / 3.5) / 3;
-    this.text.innerHTML = Math.floor(value) + '<tspan font-size="' + tspanSize + '" dy="' + -tspanSize * 1.2 + '">%</tspan>';
+    this.text.innerHTML = Math.floor(value) + '<tspan font-size="' + tspanSize + '" dy="' + -tspanSize * 1.2 + '"></tspan>';
 };
 
 //

@@ -34,13 +34,11 @@ nav{
     top:0;
 
     overflow: hidden;
-
-    z-index: 2;
-
     border-bottom: 5px solid black;
 }
 
 header{
+    z-index:1;
     position: fixed;
 }
 

@@ -9,11 +9,6 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
 }
-p{
-    font-family:'Montserrat', sans-serif;
-    /*font-size:2vw;*/
-    text-decoration: none;
-}
 
 nav{
   /* font-family: Arial, Helvetica, sans-serif; */
@@ -32,13 +27,13 @@ nav{
     margin-left: 0px;
     position:fixed;
     top:0;
-
+    z-index: 2;
     overflow: hidden;
     border-bottom: 5px solid black;
 }
 
 header{
-    z-index:1;
+    z-index: 2;
     position: fixed;
 }
 
@@ -122,4 +117,8 @@ input[type=submit] {
 }
 input[type=submit]:hover {
   background-color: #A5B2BB;
+}
+.container_login{
+  width: 50%;
+  margin: auto;
 }

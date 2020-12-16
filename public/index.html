@@ -13,7 +13,7 @@
   padding: 20px;
 }
 #data{
-    width:50%;
+    /*width:50%;*/
     margin-right: auto;
 }
 .category{
@@ -82,11 +82,11 @@
             console.log("TRYING FOR "+i)
             emotion_sum += data.entries[i].score
             entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'><span class='category'>Date:</span> "
-                    + datestring + "</span><br />"
+                    + datestring + "</span>"
                     + "<span class = 'score'><span class='category'>e<span style='color:#426ff5'>-</span>motion Score:</span> "
                     + data.entries[i].score + "<br /></span>"
-                    + "<span class = 'entry_text'><span class='category'>Entry:</span><br />"
-                    + data.entries[i].entry +"</span></div>";
+                    + "<span class = 'entry_text'><span class='category'>Entry:</span><p>"
+                    + data.entries[i].entry +"</p></span></div>";
       }
 
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES

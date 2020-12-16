@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
 <title>Register</title>
 <style>
 	input[type=text], select {
@@ -32,11 +33,6 @@
 	  background-color: #f2f2f2;
 	  padding: 20px;
 	}
-	/*body {
-		width: 60%;
-		margin-left: auto;
-		margin-right: auto;
-	}*/
 </style>
 <script>
 	function validateForm() {
@@ -57,16 +53,17 @@
 
 
 <body>
+	<div class="container">
   <h1>Register</h1>
   <div>
   <form id="register_form" onsubmit="validateForm()">
-     User name: <input type = "text" name = "name">  <br>
-		 Email: <input type = "text" name = "email">  <br>
-		 Password: <input type = "text" name = "password">  <br>
-		 Password again: <input type = "text" name = "password_2">  <br>
-     <input type = "submit" value = "Submit">
+     User name: <input type = "text" class="type-field" name = "name">  <br>
+		 Email: <input type = "text" class="type-field" name = "email">  <br>
+		 Password: <input type = "password" class="type-field" name = "password">  <br>
+		 Password again: <input type = "password" class="type-field" name = "password_2">  <br>
+     <input type = "submit" class="button-font" value = "Submit">
   </form>
-	<a href="login.html">login</a>
+	<h2><a href="login.html">login</a></h2>
   </div>
 	
 	<script>
@@ -100,6 +97,6 @@
 		register_form.addEventListener("submit", insertForm);
 		
 	</script>
-	
+	</div>
 </body>
 </html>

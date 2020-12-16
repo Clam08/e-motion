@@ -110,7 +110,6 @@ app.get('/blog', verifyToken, async (req, res) => {
     console.log("items_found " + items_found);
 
     res.status(200).send(items_found);
-    // return res.status(200).json({message: "success"});
 
   } catch (err) {
       console.log(err);

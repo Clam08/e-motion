@@ -19,6 +19,18 @@
 .category{
     font-weight:bold;
 }
+.wrapper{
+
+    /*align-content: center;*/
+    /*text-align:center;*/
+    width:80%;
+    margin:auto;
+}
+#stats{
+    /*width:40%;
+    margin:auto;*/
+    padding-left:20px;
+}
 </style>
 
 </head>
@@ -33,7 +45,8 @@
 
 <body>
     <div class="container">
-  <h1>home page</h1>
+    <h1 id="user_title">home page</h1>
+    <div class="wrapper">
   <h2>statistics</h2>
   <div class="center-content">
       <div id = "stats">Your stats should show up here once you've written at least one entry! Try logging in or creating an account.
@@ -83,15 +96,16 @@
             emotion_sum += data.entries[i].score
             entries_report += "<div class = 'entry'"+" style = 'background-color: "+ getEmotionColor(data.entries[i].score) +"'><span class = 'date'><span class='category'>Date:</span> "
                     + datestring + "</span>"
-                    + "<span class = 'score'><span class='category'>e<span style='color:#426ff5'>-</span>motion Score:</span> "
-                    + data.entries[i].score + "<br /></span>"
+                    + "<span class = 'score'><br/><span class='category'>e<span style='color:#426ff5'>-</span>motion Score:</span> "
+                    + data.entries[i].score + "<br /></span><br/>"
                     + "<span class = 'entry_text'><span class='category'>Entry:</span><p>"
                     + data.entries[i].entry +"</p></span></div>";
       }
 
       //CODE TO GENERATE STATISTICS REGARDING ENTRIES
-      stats_report = "<h3>" + data.user + "'s e<span style='color:#426ff5'>-</span>motion stats so far:</h3>";
-      stats_report += "<div class = 'stat_text'> Entries Written: "
+      document.getElementById("user_title").innerHTML = data.user + "'s homepage";
+
+      stats_report = "<div class = 'stat_text'> Entries Written: "
       +num_entries
       +"<br />Average e<span style='color:#426ff5'>-</span>motion score: "
       +(emotion_sum/num_entries)
@@ -135,4 +149,5 @@
 
 </div>
 </body>
+</div>
 </html>

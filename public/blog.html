@@ -147,6 +147,10 @@
       flex: 1;
       padding: 0 20px;
     }
+    
+    .button2{
+      
+    }
 
 
 
@@ -167,12 +171,12 @@
   <div id="all-contain">
       <div id = "left-contain">
           <h1>write anything</h1>
-          <div contenteditable="true" name ="content" id="entry-box">
-          </div>
+          <div contenteditable="true" name ="content" id="entry-box"></div>
+          <a class = 'button2' href="blog.html">write another entry</a>
+          <a class = 'button2' href="index.html">back to home</a>
       </div>
 
       <div id = "divider"></div>
-
 
       <div id = "right-contain">
           <h1>and we'll analyze it for you</h1>
@@ -180,9 +184,8 @@
               <button type ="submit" class="button" id="analyze">begin analysis</button>
           </div>
           <div class="dial" style="display:none;">
-                       <div class="container chart" data-size="400" data-value="88" data-arrow="up">
-                                </div>
-            </div>
+              <div class="container chart" data-size="400" data-value="88" data-arrow="up"></div>
+          </div>
       </div>
   </div>
   </form>
@@ -268,6 +271,8 @@
         /* get data delimited by %20s from text elem*/
         var contenteditable = document.querySelector('[contenteditable]'),
         text = contenteditable.textContent;
+        contenteditable.setAttribute("contenteditable","false");
+
         text = URLify(text);
         console.log(text)
         const data = "text="+text;

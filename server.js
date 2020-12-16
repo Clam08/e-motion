@@ -41,6 +41,7 @@ app.post('/login', async (req, res) => {
 
     var items_found = await coll.findOne(theQuery);
     if (!items_found){
+      console.log("user not found");
       return res.status(400).json({message: "user not found"});
     }
 

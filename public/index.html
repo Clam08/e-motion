@@ -86,7 +86,7 @@
       entries_report = "<h2>entries</h2>";
       console.log(JSON.stringify(data.entries))
       emotion_sum = 0;
-      for (i = num_entries - 1; i > 0; i--) {
+      for (i = num_entries - 1; i >= 0; i--) {
         //entries_report += "<div class = 'entry'>" + data.entries[i] + "</div>";
         console.log(data.entries[i])
             var dt = new Date(data.entries[i].date)

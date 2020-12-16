@@ -73,8 +73,8 @@ app.post('/register', async (req, res) => {
 
     var items_found = await coll.findOne(theQuery);
     if (items_found){
-      return res.status(400).json({message: "user already exist"});
       console.log("user already exist!");
+      return res.status(400).json({message: "user already exist"});
     }
 
     var newData = {"user": user_name, "email": user_email, "password": password_hashed};

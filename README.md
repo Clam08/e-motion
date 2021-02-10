@@ -15,4 +15,5 @@ Sentiment Analysis API through RapidAPI in order to evaluate the content of
 journal entries, and is hosted through Heroku.
 
 Click below for a video demo!
+
 [![E-Motion Video Link Should Be Here](https://img.youtube.com/vi/4zkK-eow4Co/0.jpg)](https://www.youtube.com/watch?v=4zkK-eow4Co)

@@ -1,4 +1,5 @@
 Project Title: E-Motion
+
 Contributors: Milo Shields, Chloe Lam, Amy Yao
 
 E-Motion is a web app that uses a textual emotional analysis API to extract 

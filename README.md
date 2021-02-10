@@ -13,3 +13,5 @@ dialogue without demanding a direct or self-reported source of emotional data.
 The app is built on Node.js and uses a MongoDB database. It uses the Twinword
 Sentiment Analysis API through RapidAPI in order to evaluate the content of
 journal entries, and is hosted through Heroku.
+
+[![E-Motion Video Link Should Be Here](https://img.youtube.com/vi/4zkK-eow4Co/0.jpg)](https://www.youtube.com/watch?v=4zkK-eow4Co)

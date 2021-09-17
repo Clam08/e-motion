@@ -17,6 +17,7 @@ function showScore(){
     emotion_score *=100;
     emotion_score /= 2;
     emotion_score += 50;
+
     var emotion_string = Math.round(emotion_score).toString()
     var containers = document.getElementsByClassName("chart");
     document.getElementsByClassName("dial")[0].style.display = "flex";
@@ -42,9 +43,12 @@ function getResponse(){
 
     xhr.addEventListener("readystatechange", function () {
     	if (this.readyState === this.DONE) {
-    		console.log(this.responseText);
+    		console.log(this.responseText); //this is working
+
             analysis_obj = JSON.parse(this.responseText);
-            emotion_score = analysis_obj["score"];
+            // emotion_score = analysis_obj["score"];
+
+            emotion_score = 100;
             showScore();
     	}
     });

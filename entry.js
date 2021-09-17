@@ -45,7 +45,7 @@ function getResponse(){
     	if (this.readyState === this.DONE) {
     		console.log(this.responseText); //this is working
 
-            analysis_obj = JSON.parse(this.responseText);
+            // analysis_obj = JSON.parse(this.responseText);
             // emotion_score = analysis_obj["score"];
 
             emotion_score = 100;

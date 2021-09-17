@@ -35,6 +35,8 @@ function getResponse(){
     console.log(text)
     const data = "text="+text;
     console.log(data);
+
+    // xhr object
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
@@ -52,10 +54,9 @@ function getResponse(){
     // xhr.setRequestHeader("x-rapidapi-key", "34a6905a16msh38f44642663039ap15cd20jsn3ef0bc3e0487");
     // xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
 
-    xhr.open("POST", "https://twinword-twinword-bundle-v1.p.rapidapi.com/word_associations/");
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.open("GET", "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/?text=great%20value%20in%20its%20price%20range!");
+    xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
-    xhr.setRequestHeader("x-rapidapi-host", "twinword-twinword-bundle-v1.p.rapidapi.com");
 
     xhr.send(data);
 }

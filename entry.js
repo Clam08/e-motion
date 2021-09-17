@@ -49,6 +49,8 @@ function getResponse(){
             // emotion_score = analysis_obj["score"];
 
             emotion_score = 100;
+
+            console.log("emotion_score is 100");
             showScore();
     	}
     });
@@ -58,12 +60,12 @@ function getResponse(){
     // xhr.setRequestHeader("x-rapidapi-key", "34a6905a16msh38f44642663039ap15cd20jsn3ef0bc3e0487");
     // xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
 
-    xhr.open("POST", "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/");
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
-    xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
-
-    xhr.send(data);
+    // xhr.open("POST", "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/");
+    // xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
+    // xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+    //
+    // xhr.send(data);
 }
 
 document.getElementById("analyze").addEventListener("click",getResponse);

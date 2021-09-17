@@ -11,6 +11,9 @@ emotional content */
 function showScore(){
     console.log("Starting to show score.")
     //document.getElementsByClassName("wrap")[0].innerHTML = emotion_score;
+
+    emotion_score = 100;
+
     emotion_score *=100;
     emotion_score /= 2;
     emotion_score += 50;
@@ -44,13 +47,19 @@ function getResponse(){
     	}
     });
 
-    xhr.open("POST", "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/");
+    // xhr.open("POST", "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/");
+    // xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("x-rapidapi-key", "34a6905a16msh38f44642663039ap15cd20jsn3ef0bc3e0487");
+    // xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
+
+    xhr.open("POST", "https://twinword-twinword-bundle-v1.p.rapidapi.com/word_associations/");
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("x-rapidapi-key", "34a6905a16msh38f44642663039ap15cd20jsn3ef0bc3e0487");
-    xhr.setRequestHeader("x-rapidapi-host", "twinword-sentiment-analysis.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+    xhr.setRequestHeader("x-rapidapi-host", "twinword-twinword-bundle-v1.p.rapidapi.com");
 
     xhr.send(data);
 }
+
 document.getElementById("analyze").addEventListener("click",getResponse);
 
 var Dial = function(container) {
